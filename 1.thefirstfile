@@ -1,2 +1,17 @@
 R:
 list.files(path="")
+
+getwd()                 # 查看当前文件夹是哪个
+setwd("path/to/dir")    # 切换文件夹
+file.exists("x.csv")    # 判断文件是否存在
+basename("/a/b/c.csv")  # 取文件名 "c.csv"
+dirname("/a/b/c.csv")   # 取目录 "/a/b"
+
+library(fs)
+dir_ls()                    # 列出所有文件，带颜色高亮
+dir_info()                  # 返回数据框：文件名、大小、修改时间、类型等
+dir_ls(regexp = "\\.R$")    # 筛选所有 R 脚本
+
+dir_info() |>
+  dplyr::arrange(desc(modification_time)) |>
+  dplyr::select(path, size, modification_time)
